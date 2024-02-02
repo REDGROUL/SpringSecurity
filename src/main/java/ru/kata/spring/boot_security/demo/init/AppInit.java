@@ -34,7 +34,9 @@ public AppInit(UserService userService, RoleService roleService, PasswordEncoder
     public void cretaeDefualtUsers() {
         roleService.save(new Role("ROLE_ADMIN"));
         roleService.save(new Role("ROLE_USER"));
-        userService.saveUser(new User("admin", 23, "admin", Set.of(new Role(1L, "ROLE_ADMIN"))));
+
+
+        userService.saveUser(new User("admin", 23, "admin", Set.of(new Role(1L, "ROLE_ADMIN"), new Role(2L, "ROLE_USER"))));
         userService.saveUser(new User("user", 23, "user", Set.of(new Role(2L, "ROLE_USER"))));
     }
 

@@ -8,6 +8,8 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/admin/")
 public class AdminController {
@@ -21,8 +23,10 @@ public class AdminController {
     }
 
     @GetMapping("/")
-    public String printUsers(ModelMap model) {
+    public String printUsers(ModelMap model, Principal principal, @ModelAttribute("user") User user) {
 
+        model.addAttribute("currentUser", userService.findUserByUsername(principal.getName()));
+        model.addAttribute("roles", roleService.findAllRoles());
         model.addAttribute("users", userService.findAllUsers());
         return "userList";
     }
@@ -42,7 +46,7 @@ public class AdminController {
     @PostMapping("/addUser")
     public String addUser(ModelMap modelMap, @ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "redirect:/admin/addUser";
+        return "redirect:/admin/";
     }
 
 

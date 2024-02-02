@@ -24,8 +24,8 @@ public class UserController {
 
     @GetMapping("/")
     public String printUse(ModelMap model, Principal principal) {
-        model.addAttribute("user", userService.findUserByUsername(principal.getName()));
-        return "user";
+        model.addAttribute("currentUser", userService.findUserByUsername(principal.getName()));
+        return "userList";
     }
 
 
