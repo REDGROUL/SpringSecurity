@@ -28,7 +28,7 @@ public class AdminController {
         model.addAttribute("currentUser", userService.findUserByUsername(principal.getName()));
         model.addAttribute("roles", roleService.findAllRoles());
         model.addAttribute("users", userService.findAllUsers());
-        return "userList";
+        return "userListApi";
     }
 
     @GetMapping(value = "/removeUser/{id}")

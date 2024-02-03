@@ -54,22 +54,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void saveUser(User user) {
+    public User saveUser(User user) {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+        return user;
 
     }
 
     @Override
     @Transactional
-    public void updateUser(Long id,User user) {
+    public User updateUser(Long id,User user) {
         User findUser = userRepository.getById(id);
 
         findUser.setAge(user.getAge());
         findUser.setUsername(user.getUsername());
         findUser.setPassword(user.getPassword());
         userRepository.save(findUser);
+        return findUser;
 
     }
 }
